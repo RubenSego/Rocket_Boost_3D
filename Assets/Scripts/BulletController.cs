@@ -23,7 +23,7 @@ public class BulletController : MonoBehaviour
         // Deactivates the bullet when it collides with another objects.
         DeactivateBullet();
 
-        // TODO: Particles.
+        // TODO: Particles. 
         // TODO: If bullet hits enemies, reduce enemy health.
         // TODO: If bullet hits obstacles, destroy obstacles.
         // TODO: If bullet hits player, reduce player health.

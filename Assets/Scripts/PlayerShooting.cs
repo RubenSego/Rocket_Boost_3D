@@ -11,6 +11,10 @@ public class PlayerShooting : MonoBehaviour
     [SerializeField] private float bulletSpeed = 20f;
     [SerializeField] private float bulletRate = 0.25f;
     [SerializeField] private int bulletDamage = 1;
+
+    [Header("Audio Settings")]
+    [SerializeField] private AudioClip shootAudioClip;
+    [SerializeField] private AudioSource audioSource;
     
     private Transform bulletSpawnPoint;
     private ObjectPool bulletPool;
@@ -21,6 +25,15 @@ public class PlayerShooting : MonoBehaviour
     {
         bulletSpawnPoint = transform.Find("ShootPoint");
         bulletPool = GetComponent<ObjectPool>();
+
+        if (audioSource == null)
+        {
+            audioSource = GetComponent<AudioSource>();
+            if (audioSource == null)
+            {
+                audioSource = GetComponentInChildren<AudioSource>();
+            }
+        }
     }
 
     /// <summary>
@@ -45,13 +58,18 @@ public class PlayerShooting : MonoBehaviour
             lastShotTime = Time.time;
             // Reduce the ammo.
             if (!infiniteAmmo) currentAmmo--;
+            // Plays the shot sound.
+            if (audioSource != null && shootAudioClip != null)
+            {
+                audioSource.PlayOneShot(shootAudioClip);
+            }
             // Get a bullet form the object pool.
             GameObject bullet = bulletPool.GetObjectFromPool();
             bullet.transform.position = bulletSpawnPoint.position;
             bullet.transform.rotation = bulletSpawnPoint.rotation;            
             // Set the bullet's speed and movement forward.
             Rigidbody bulletRigidbody = bullet.GetComponent<Rigidbody>();
-            bulletRigidbody.linearVelocity = bulletSpawnPoint.up * bulletSpeed;
+            bulletRigidbody.linearVelocity = bulletSpawnPoint.right * bulletSpeed;
         }
     }
 }

@@ -25,6 +25,7 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody rb;
     AudioSource audioSource;
     PlayerShooting playerShooting;
+    Animator animator;
 
     void OnEnable()
     {
@@ -38,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         audioSource = GetComponent<AudioSource>();
         playerShooting = GetComponent<PlayerShooting>();
+        animator = GetComponentInChildren<Animator>();
     }
 
     void FixedUpdate()
@@ -109,10 +111,12 @@ public class PlayerMovement : MonoBehaviour
         if (thrust.IsPressed())
         {
             StartThrusting();
+            SetFlying(true);
         }
         else
         {
             StopThrusting();
+            SetFlying(false);
         }
     }
     /// <summary>
@@ -135,7 +139,14 @@ public class PlayerMovement : MonoBehaviour
     private void StopThrusting()
     {
         thrustParticleSystem.Stop();
-        audioSource.Stop();
+        //audioSource.Stop();
     }
 
+    private void SetFlying(bool flying)
+    {
+        if (animator != null)
+        {
+            animator.SetBool("isFlying", flying);
+        }
+    }
 }

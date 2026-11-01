@@ -7,6 +7,7 @@ TagManager:
   - LaunchPad
   - LandingPad
   - Explosion
+  - Enemy
   layers:
   - Default
   - TransparentFX

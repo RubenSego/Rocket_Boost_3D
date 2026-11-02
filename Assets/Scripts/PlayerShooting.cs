@@ -6,6 +6,7 @@ public class PlayerShooting : MonoBehaviour
     [SerializeField] private int currentAmmo = 10;
     [SerializeField] private int maxAmmo = 10;
     [SerializeField] private bool infiniteAmmo = false;
+    [SerializeField] private AmmoHUD ammoHUD;
 
     [Header("Shooting Settings")]
     [SerializeField] private float bulletSpeed = 20f;
@@ -34,6 +35,10 @@ public class PlayerShooting : MonoBehaviour
                 audioSource = GetComponentInChildren<AudioSource>();
             }
         }
+        if (ammoHUD != null)
+        {
+            ammoHUD.UpdateAmmo(currentAmmo);
+        }
     }
 
     /// <summary>
@@ -58,6 +63,8 @@ public class PlayerShooting : MonoBehaviour
             lastShotTime = Time.time;
             // Reduce the ammo.
             if (!infiniteAmmo) currentAmmo--;
+            // Update the ammo in HUD.
+            if (ammoHUD != null) ammoHUD.UpdateAmmo(currentAmmo);
             // Plays the shot sound.
             if (audioSource != null && shootAudioClip != null)
             {

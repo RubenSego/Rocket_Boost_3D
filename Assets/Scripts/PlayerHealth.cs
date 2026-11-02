@@ -3,6 +3,13 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
+    [Header("UI Reference")]
+    [SerializeField] private HealthHUD healthHUD;
+
+    [Header("Visual Model")]
+    [Tooltip("Sparrow Sprite")]
+    [SerializeField] private GameObject sparrowModel;
+    
     [Header("Health Settings")]
     [SerializeField] private int maxHealth = 3;
     [SerializeField] private int currentHealth;
@@ -17,6 +24,12 @@ public class PlayerHealth : MonoBehaviour
         currentHealth = maxHealth;
         // Getting renders for blinking during invulnerability.
         playerRenderers = GetComponentsInChildren<Renderer>();
+
+        // Initialize the HUD.
+        if (healthHUD != null)
+        {
+            healthHUD.SetupHUD(maxHealth);
+        }
     }
 
     public void TakeDamage(int damage)
@@ -26,6 +39,12 @@ public class PlayerHealth : MonoBehaviour
 
         currentHealth -= damage;
         Debug.Log($"Vida restante: {currentHealth}");
+
+        // Update the HUD to break the egg.
+        if (healthHUD != null)
+        {
+            healthHUD.UpdateHealth(currentHealth);
+        }
 
         if (currentHealth <= 0)
         {
@@ -61,19 +80,46 @@ public class PlayerHealth : MonoBehaviour
 
     private void SetRenderersVisible(bool visible)
     {
-        foreach (Renderer rend in playerRenderers)
+        if (sparrowModel != null)
         {
-            if (rend != null) rend.enabled = visible;
+            sparrowModel.SetActive(visible);
         }
     }
 
     private void Die()
     {
         Debug.Log("El jugador ha muerto.");
-        // Deactivate control.
-        gameObject.SetActive(false);
+        
+        // Update the HUD to break the eggs.
+        if (healthHUD != null)
+        {
+            healthHUD.UpdateHealth(0);
+        }
+        // Hide the visual model.
+        SetRenderersVisible(false);
+
+        // Deactivate collisions.
+        Collider col = GetComponent<Collider>();
+        if (col != null) col.enabled = false;
+
+        // Freeze the physics to avoid infinite falling.
+        Rigidbody rb = GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.linearVelocity = Vector3.zero; // En Unity 2023+ (o rb.velocity = Vector3.zero en versiones anteriores)
+            rb.angularVelocity = Vector3.zero;
+            rb.isKinematic = true;
+        }
+        // Waiting before shutdown the GameObject.
+        StartCoroutine(DieRoutine());
         // TODO: SFX Damage when player gets enemy damage.
         // TODO: SFX Death when an enemy kills the player. Is only set when player explodes when he collides objects with Explosion tag.
+    }
+
+    private IEnumerator DieRoutine()
+    {
+        yield return new WaitForSeconds(1.5f); // Tiempo suficiente para que termine el audio del choque
+        gameObject.SetActive(false);
     }
 
     // Trigger enemy collider.

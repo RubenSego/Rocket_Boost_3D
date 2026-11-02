@@ -147,4 +147,20 @@ public class PlayerHealth : MonoBehaviour
             TakeDamage(1);
         }
     }
+
+    public void Heal(int amount)
+    {
+        // Don't heal if player is dead.
+        if (currentHealth <= 0) return;
+
+        // Increase health without exceeding maxHealth.
+        currentHealth = Mathf.Min(currentHealth + amount, maxHealth);
+        Debug.Log($"Vida recuperada. Actual: {currentHealth}");
+
+        // Updates health bar.
+        if (healthHUD != null)
+        {
+            healthHUD.UpdateHealth(currentHealth);
+        }
+    }
 }

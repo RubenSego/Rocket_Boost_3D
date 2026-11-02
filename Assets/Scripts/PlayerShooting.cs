@@ -79,4 +79,15 @@ public class PlayerShooting : MonoBehaviour
             bulletRigidbody.linearVelocity = bulletSpawnPoint.right * bulletSpeed;
         }
     }
+    public void AddAmmo(int amount)
+    {
+        currentAmmo = Mathf.Min(currentAmmo + amount, maxAmmo);
+        Debug.Log($"Munición recogida. Actual: {currentAmmo}");
+
+        // Updates the ammo HUD.
+        if (ammoHUD != null)
+        {
+            ammoHUD.UpdateAmmo(currentAmmo);
+        }
+    }
 }

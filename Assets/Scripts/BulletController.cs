@@ -6,6 +6,9 @@ public class BulletController : MonoBehaviour
     [SerializeField] private float bulletLifeTime = 1f;
     [SerializeField] private int damage = 1;
 
+    [Header("Visual Effects")]
+    [SerializeField] private GameObject hitVFX;
+
     void OnEnable()
     {
         CancelInvoke();
@@ -36,12 +39,44 @@ public class BulletController : MonoBehaviour
             }
 
             // Deactivates the bullet when it collides with another objects.
+            SpawnHitEffect();
             DeactivateBullet();
+            return;
         }
 
-        // TODO: Particles. 
-        // TODO: If bullet hits enemies, reduce enemy health.
-        // TODO: If bullet hits obstacles, destroy obstacles.
-        // TODO: If bullet hits player, reduce player health.
+        // If collides with explosive object, get the component ExplosiveObject and explodes.
+        if (other.CompareTag("Explosive"))
+        {
+            ExplosiveObject explosive = other.GetComponentInParent<ExplosiveObject>();
+            if (explosive != null)
+            {
+                explosive.Explode();
+            }
+
+            SpawnHitEffect();
+            DeactivateBullet();
+            return;
+        }
+        if (other.CompareTag("Explosion"))
+        {
+            Destroy(other.gameObject); 
+
+            SpawnHitEffect();
+            DeactivateBullet();
+            return;
+        }
+        // If collides with obstacles, walls or ground.
+        SpawnHitEffect();
+        DeactivateBullet();
+    }
+
+    private void SpawnHitEffect()
+    {
+        if (hitVFX != null)
+        {
+            Vector3 spawnPosition = transform.position - transform.forward * 0.2f; 
+            GameObject effect = Instantiate(hitVFX, spawnPosition, Quaternion.identity);
+            Destroy(effect, 1.5f);
+        }
     }
 }

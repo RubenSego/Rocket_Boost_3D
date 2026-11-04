@@ -16,8 +16,13 @@ public class PlayerHealth : MonoBehaviour
 
     [Header("Invulnerability Settings")]
     [SerializeField] private float invulnerabilityDuration = 1.0f;
+
+    [Header("VFX/SFX Death")]
+    [SerializeField] private AudioClip explosionAudioClip;
+    [SerializeField] private ParticleSystem explosionParticleSystem;
     private bool isInvulnerable = false;
     Renderer[] playerRenderers;
+    CollisionManager collisionManager;
 
     void Start()
     {
@@ -30,6 +35,7 @@ public class PlayerHealth : MonoBehaviour
         {
             healthHUD.SetupHUD(maxHealth);
         }
+        collisionManager = GetComponent<CollisionManager>();
     }
 
     public void TakeDamage(int damage)
@@ -112,8 +118,7 @@ public class PlayerHealth : MonoBehaviour
         }
         // Waiting before shutdown the GameObject.
         StartCoroutine(DieRoutine());
-        // TODO: SFX Damage when player gets enemy damage.
-        // TODO: SFX Death when an enemy kills the player. Is only set when player explodes when he collides objects with Explosion tag.
+        collisionManager.ManageCollision(explosionAudioClip, explosionParticleSystem);
     }
 
     private IEnumerator DieRoutine()

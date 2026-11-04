@@ -31,19 +31,18 @@ public class CollisionManager : MonoBehaviour
             case "LandingPad":
                 ManageCollision(landingAudioClip, landingParticleSystem);
                 break;
-            case "Explosion":
-                ManageCollision(explosionAudioClip, explosionParticleSystem);
+            case "Danger":
                 // Apply damage.
                 if (playerHealth != null)
                 {
-                    playerHealth.TakeDamage(999);
+                    playerHealth.TakeDamage(1);
                 }
                 break;
             default:
                 break;
         }
     }
-    private void ManageCollision(AudioClip audioClip, ParticleSystem particleSystem)
+    public void ManageCollision(AudioClip audioClip, ParticleSystem particleSystem)
     {
         isControllable = false;
         audioSource.Stop();

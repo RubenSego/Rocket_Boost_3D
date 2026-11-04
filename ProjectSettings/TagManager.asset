@@ -8,6 +8,9 @@ TagManager:
   - LandingPad
   - Explosion
   - Enemy
+  - Explosive
+  - FxTemporaire
+  - Danger
   layers:
   - Default
   - TransparentFX

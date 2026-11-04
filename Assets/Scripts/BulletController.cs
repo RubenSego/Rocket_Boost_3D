@@ -57,7 +57,7 @@ public class BulletController : MonoBehaviour
             DeactivateBullet();
             return;
         }
-        if (other.CompareTag("Explosion"))
+        if (other.CompareTag("Danger"))
         {
             Destroy(other.gameObject); 
 

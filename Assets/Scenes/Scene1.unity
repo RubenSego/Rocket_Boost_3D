@@ -1838,7 +1838,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6193238170341674930, guid: 3ae10fb5b692ef0408109c9583e3325a, type: 3}
       propertyPath: m_TagString
-      value: Explosion
+      value: Danger
       objectReference: {fileID: 0}
     - target: {fileID: 6766417498806549379, guid: 3ae10fb5b692ef0408109c9583e3325a, type: 3}
       propertyPath: m_Name
@@ -1850,7 +1850,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7825734969302556723, guid: 3ae10fb5b692ef0408109c9583e3325a, type: 3}
       propertyPath: m_TagString
-      value: Explosion
+      value: Danger
       objectReference: {fileID: 0}
     - target: {fileID: 8095522032628461730, guid: 3ae10fb5b692ef0408109c9583e3325a, type: 3}
       propertyPath: m_LocalScale.x

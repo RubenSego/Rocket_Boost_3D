@@ -19,9 +19,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private ParticleSystem leftThrustParticleSystem;
     [SerializeField] private ParticleSystem rightThrustParticleSystem;
 
-    [Header("Audio Settings")]
-    [SerializeField] private AudioClip thrustAudioClip;
-
     Rigidbody rb;
     AudioSource audioSource;
     PlayerShooting playerShooting;
@@ -129,7 +126,6 @@ public class PlayerMovement : MonoBehaviour
         if (!thrustParticleSystem.isPlaying)
         {
             thrustParticleSystem.Play();
-            audioSource.PlayOneShot(thrustAudioClip);
         }
     }
 

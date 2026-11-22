@@ -91,7 +91,8 @@ public class PowerUp : MonoBehaviour
 
             if (pickupSound != null)
             {
-                AudioSource.PlayClipAtPoint(pickupSound, transform.position);
+                AudioManager.Instance?.PlaySFX(pickupSound);
+                //AudioSource.PlayClipAtPoint(pickupSound, transform.position);
             }
 
             if (pickupEffect != null)

@@ -45,8 +45,9 @@ public class CollisionManager : MonoBehaviour
     public void ManageCollision(AudioClip audioClip, ParticleSystem particleSystem)
     {
         isControllable = false;
-        audioSource.Stop();
-        audioSource.PlayOneShot(audioClip);
+        /* audioSource.Stop();
+        audioSource.PlayOneShot(audioClip); */
+        AudioManager.Instance?.PlaySFX(landingAudioClip);
         particleSystem.Play();
         playerMovement.enabled = false;
     }

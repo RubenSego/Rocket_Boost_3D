@@ -27,7 +27,8 @@ public class ExplosiveObject : MonoBehaviour
         // Plays the sound effect.
         if (explosionSFX != null)
         {
-            AudioSource.PlayClipAtPoint(explosionSFX, transform.position);
+            AudioManager.Instance?.PlaySFX(explosionSFX);
+            //AudioSource.PlayClipAtPoint(explosionSFX, transform.position);
         }
 
         // Area damage.

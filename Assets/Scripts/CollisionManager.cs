@@ -9,11 +9,23 @@ public class CollisionManager : MonoBehaviour
     [Header("Particle Systems")]
     [SerializeField] private ParticleSystem explosionParticleSystem;
     [SerializeField] private ParticleSystem landingParticleSystem;
+
+    [Header("Level Complete UI")]
+    [SerializeField] private GameObject levelCompletePanel;
+    [SerializeField] private bool pauseGameOnComplete = true;
+
     AudioSource audioSource;
     PlayerMovement playerMovement;
     PlayerHealth playerHealth;
 
     bool isControllable = true; 
+    void Awake()
+    {
+        if (levelCompletePanel != null)
+        {
+            levelCompletePanel.SetActive(false);
+        }
+    }
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
@@ -30,6 +42,7 @@ public class CollisionManager : MonoBehaviour
                 break;
             case "LandingPad":
                 ManageCollision(landingAudioClip, landingParticleSystem);
+                CompleteLevel();
                 break;
             case "Danger":
                 // Apply damage.
@@ -45,10 +58,20 @@ public class CollisionManager : MonoBehaviour
     public void ManageCollision(AudioClip audioClip, ParticleSystem particleSystem)
     {
         isControllable = false;
-        /* audioSource.Stop();
-        audioSource.PlayOneShot(audioClip); */
         AudioManager.Instance?.PlaySFX(audioClip);
         particleSystem.Play();
         playerMovement.enabled = false;
+    }
+    private void CompleteLevel()
+    {
+        if (levelCompletePanel != null)
+        {
+            levelCompletePanel.SetActive(true);
+        }
+
+        if (pauseGameOnComplete)
+        {
+            Time.timeScale = 0f;
+        }
     }
 }

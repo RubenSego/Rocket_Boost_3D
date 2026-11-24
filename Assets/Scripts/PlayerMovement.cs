@@ -135,7 +135,6 @@ public class PlayerMovement : MonoBehaviour
     private void StopThrusting()
     {
         thrustParticleSystem.Stop();
-        //audioSource.Stop();
     }
 
     private void SetFlying(bool flying)
@@ -144,5 +143,12 @@ public class PlayerMovement : MonoBehaviour
         {
             animator.SetBool("isFlying", flying);
         }
+    }
+
+    public void ResetMovementState()
+    {
+        StopThrusting();
+        StopRotation();
+        SetFlying(false);
     }
 }

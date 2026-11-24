@@ -141,4 +141,11 @@ public class PlayerEggDropper : MonoBehaviour
         currentEggs = maxEggs;
         regenTimer = 0f;
     }
+    
+    public void SetEggs(int eggs)
+    {
+        currentEggs = Mathf.Clamp(eggs, 0, maxEggs);
+        regenTimer = 0f;
+        RefreshHUD();
+    }
 }

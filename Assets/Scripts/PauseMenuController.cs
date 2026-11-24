@@ -8,9 +8,12 @@ public class PauseMenuController : MonoBehaviour
     [SerializeField] private GameObject pausePanel;
     [SerializeField] private GameObject settingsPanel;
 
-
     [Header("Scenes")]
     [SerializeField] private string mainMenuSceneName = "Menu";
+
+    [Header("Death Block")]
+    [SerializeField] private GameObject deathPanel;
+    [SerializeField] private PlayerHealth playerHealth;
 
     public static bool isPaused = false;
 
@@ -25,6 +28,20 @@ public class PauseMenuController : MonoBehaviour
     {
         if (Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
         {
+            if (deathPanel != null && deathPanel.activeInHierarchy)
+            {
+                return;
+            }
+
+            PlayerHealth health = playerHealth != null
+                ? playerHealth
+                : FindAnyObjectByType<PlayerHealth>(FindObjectsInactive.Include);
+
+            if (health != null && health.IsDead)
+            {
+                return;
+            }
+
             if (isPaused)
                 ResumeGame();
             else

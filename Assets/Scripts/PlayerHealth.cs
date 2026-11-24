@@ -19,10 +19,13 @@ public class PlayerHealth : MonoBehaviour
 
     [Header("VFX/SFX Death")]
     [SerializeField] private AudioClip explosionAudioClip;
-    [SerializeField] private ParticleSystem explosionParticleSystem;
+    [SerializeField] private GameObject explosionParticleSystem;
     private bool isInvulnerable = false;
     Renderer[] playerRenderers;
     CollisionManager collisionManager;
+
+    public int CurrentHealth => currentHealth;
+    public bool IsDead => currentHealth <= 0;
 
     void Start()
     {
@@ -112,7 +115,7 @@ public class PlayerHealth : MonoBehaviour
         Rigidbody rb = GetComponent<Rigidbody>();
         if (rb != null)
         {
-            rb.linearVelocity = Vector3.zero; // En Unity 2023+ (o rb.velocity = Vector3.zero en versiones anteriores)
+            rb.linearVelocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
             rb.isKinematic = true;
         }
@@ -123,8 +126,30 @@ public class PlayerHealth : MonoBehaviour
 
     private IEnumerator DieRoutine()
     {
-        yield return new WaitForSeconds(1.5f); // Tiempo suficiente para que termine el audio del choque
+        yield return new WaitForSeconds(1.5f);
         gameObject.SetActive(false);
+
+        if (CheckpointManager.Instance != null)
+        {
+            CheckpointManager.Instance.OnPlayerDied();
+        }
+    }
+
+    public void RespawnWithHealth(int newHealth)
+    {
+        StopAllCoroutines();
+        isInvulnerable = false;
+        currentHealth = Mathf.Clamp(newHealth, 1, maxHealth);
+
+        SetRenderersVisible(true);
+
+        Collider col = GetComponent<Collider>();
+        if (col != null) col.enabled = true;
+
+        if (healthHUD != null)
+        {
+            healthHUD.UpdateHealth(currentHealth);
+        }
     }
 
     // Trigger enemy collider.

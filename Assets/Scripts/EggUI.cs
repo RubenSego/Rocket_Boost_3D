@@ -5,6 +5,9 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Animator))]
 public class EggUI : MonoBehaviour
 {
+
+    [SerializeField] private string idleStateName = "Egg_Idle";
+    
     private Animator animator;
     private Image eggImage;
     private static readonly int CrackTrigger = Animator.StringToHash("Crack");
@@ -34,7 +37,22 @@ public class EggUI : MonoBehaviour
     public void RestoreEgg()
     {
         StopAllCoroutines();
-        eggImage.enabled = true;
-        animator.Play("Egg_Idle", 0, 0f);
+        animator.ResetTrigger(CrackTrigger);
+
+        if (eggImage != null)
+        {
+            eggImage.enabled = true;
+        }
+
+        if (animator != null && animator.HasState(0, Animator.StringToHash(idleStateName)))
+        {
+            animator.Play(idleStateName, 0, 0f);
+            animator.Update(0f);
+        }
+        else if (animator != null)
+        {
+            animator.Rebind();
+            animator.Update(0f);
+        }
     }
 }

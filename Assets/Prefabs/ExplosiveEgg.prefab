@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8124689300879163535}
   - component: {fileID: 6168901457890489752}
   - component: {fileID: -4268416716885466385}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ExplosiveEgg
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -55,12 +55,40 @@ public class CollisionManager : MonoBehaviour
                 break;
         }
     }
+    private void BeginCollisionLock(AudioClip audioClip)
+    {
+        isControllable = false;
+        AudioManager.Instance?.PlaySFX(audioClip);
+        if (playerMovement != null)
+        {
+            playerMovement.enabled = false;
+        }
+    }
     public void ManageCollision(AudioClip audioClip, ParticleSystem particleSystem)
     {
         isControllable = false;
         AudioManager.Instance?.PlaySFX(audioClip);
         particleSystem.Play();
         playerMovement.enabled = false;
+    }
+    public void ManageCollision(AudioClip audioClip, GameObject particleSystem)
+    {
+        isControllable = false;
+        AudioManager.Instance?.PlaySFX(audioClip);
+        if (particleSystem != null)
+    {
+        GameObject spawnedParticles = Instantiate(particleSystem, transform.position, Quaternion.identity);
+        ParticleSystem ps = spawnedParticles.GetComponentInChildren<ParticleSystem>();
+        if (ps != null)
+        {
+            ps.Play();
+        }
+    }
+        playerMovement.enabled = false;
+    }
+    public void ResetControllable()
+    {
+        isControllable = true;
     }
     private void CompleteLevel()
     {

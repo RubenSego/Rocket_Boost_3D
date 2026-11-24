@@ -22,6 +22,8 @@ public class PlayerShooting : MonoBehaviour
     
     private float lastShotTime = 0f;
 
+    public int CurrentAmmo => currentAmmo;
+
     void Start()
     {
         bulletSpawnPoint = transform.Find("ShootPoint");
@@ -63,7 +65,6 @@ public class PlayerShooting : MonoBehaviour
             lastShotTime = Time.time;
             // Reduce the ammo.
             if (!infiniteAmmo) currentAmmo--;
-            // Update the ammo in HUD.
             if (ammoHUD != null) ammoHUD.UpdateAmmo(currentAmmo);
             // Plays the shot sound.
             if (audioSource != null && shootAudioClip != null)
@@ -85,6 +86,14 @@ public class PlayerShooting : MonoBehaviour
         //Debug.Log($"Munición recogida. Actual: {currentAmmo}");
 
         // Updates the ammo HUD.
+        if (ammoHUD != null)
+        {
+            ammoHUD.UpdateAmmo(currentAmmo);
+        }
+    }
+    public void SetAmmo(int ammo)
+    {
+        currentAmmo = Mathf.Clamp(ammo, 0, maxAmmo);
         if (ammoHUD != null)
         {
             ammoHUD.UpdateAmmo(currentAmmo);

@@ -9765,7 +9765,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.00012207031, y: 803.2398}
+  m_AnchoredPosition: {x: 0, y: 891.4}
   m_SizeDelta: {x: 799.9, y: 259.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1262153719
@@ -17289,7 +17289,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 3075, y: 1600}
+  m_SizeDelta: {x: 3075, y: 1800}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1968167311
 MonoBehaviour:
@@ -18074,7 +18074,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 5.4}
+  m_AnchoredPosition: {x: 45, y: 32}
   m_SizeDelta: {x: 2800, y: 1400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2016765048
@@ -18097,7 +18097,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Visual Assets: \n - Willowwood - Free Low Poly Nature Pack by BluBlu Games\n - Sparrow - Quirky Series by Omabuarts Studio\n - Free Pack - Easter Egg by PolyOne Studio\nVFX:\n - Cartoon FX Remaster Free by Jean Moreno\nSFX:\n - Attack sound: Macaw Sound by DRAGON-STUDIO\n - Death sound: CrowOrRaven1 by iwanPlays (Freesound)\n - Ammo powerup: Water droplets by Oxidvideos\n - Healing powerup: Spell Casting by Universfield\n - Explosive mushroom : explosion by siz0frena\nUI: \n - Free Crack Egg Animation by IvI Quddusi"
+  m_text: "Visual Assets: \n - Willowwood - Free Low Poly Nature Pack by BluBlu Games\n - Sparrow - Quirky Series by Omabuarts Studio\n - Free Pack - Easter Egg by PolyOne Studio\nVFX:\n - Cartoon FX Remaster Free by Jean Moreno\nSFX:\n - Attack sound: Macaw Sound by DRAGON-STUDIO\n - Death sound: CrowOrRaven1 by iwanPlays (Freesound)\n - Ammo powerup: Water droplets by Oxidvideos\n - Healing powerup: Spell Casting by Universfield\n - Explosive mushroom : explosion by siz0frena\n - Explosive egg: rubble_explode by canberries4\n - Drop egg: Drop Sound by qubodup\n - Level completed: UI Toast Notification by Qvantor\nUI: \n - Farm Game UI - Starter 2D by maanetorn\n - Free Crack Egg Animation by IvI Quddusi"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 26507f248a46cbf4fa958167f580e2ce, type: 2}
   m_sharedMaterial: {fileID: -5660775149628104760, guid: 26507f248a46cbf4fa958167f580e2ce, type: 2}
@@ -18124,8 +18124,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 88
-  m_fontSizeBase: 88
+  m_fontSize: 75
+  m_fontSizeBase: 75
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

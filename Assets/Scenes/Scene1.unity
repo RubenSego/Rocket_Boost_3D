@@ -21840,6 +21840,7 @@ MonoBehaviour:
   settingsPanel: {fileID: 1473630232}
   mainMenuSceneName: Menu
   deathPanel: {fileID: 2100218174}
+  levelCompletedPanel: {fileID: 1611976734}
   playerHealth: {fileID: 1857795875}
 --- !u!1001 &1881070272
 PrefabInstance:

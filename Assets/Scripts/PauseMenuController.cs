@@ -11,8 +11,10 @@ public class PauseMenuController : MonoBehaviour
     [Header("Scenes")]
     [SerializeField] private string mainMenuSceneName = "Menu";
 
-    [Header("Death Block")]
+    [Header("Panel Block")]
     [SerializeField] private GameObject deathPanel;
+    [SerializeField] private GameObject levelCompletedPanel;
+
     [SerializeField] private PlayerHealth playerHealth;
 
     public static bool isPaused = false;
@@ -29,6 +31,11 @@ public class PauseMenuController : MonoBehaviour
         if (Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
         {
             if (deathPanel != null && deathPanel.activeInHierarchy)
+            {
+                return;
+            }
+
+            if (levelCompletedPanel != null && levelCompletedPanel.activeInHierarchy)
             {
                 return;
             }

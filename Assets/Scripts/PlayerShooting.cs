@@ -26,7 +26,19 @@ public class PlayerShooting : MonoBehaviour
 
     void Start()
     {
-        bulletSpawnPoint = transform.Find("ShootPoint");
+        Transform foundSpawn = transform.Find("ShootPoint");
+        if (foundSpawn == null)
+        {
+            foreach (Transform child in GetComponentsInChildren<Transform>(true))
+            {
+                if (child.name == "ShootPoint")
+                {
+                    foundSpawn = child;
+                    break;
+                }
+            }
+        }
+        bulletSpawnPoint = foundSpawn;
         bulletPool = GetComponent<ObjectPool>();
 
         if (audioSource == null)

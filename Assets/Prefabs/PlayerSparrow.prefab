@@ -24,12 +24,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 955102115471398490}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.196, y: 0.487, z: -0.034}
+  m_LocalRotation: {x: -0, y: -0.7089465, z: -0, w: 0.70526224}
+  m_LocalPosition: {x: -0.004, y: 0.48700008, z: 0.631}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 587975332568816475}
+  m_Father: {fileID: 4888513787128527379}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1719289105678343022
 GameObject:
@@ -7108,7 +7108,6 @@ Transform:
   - {fileID: 2385428636523649688}
   - {fileID: 4365683824300289550}
   - {fileID: 7090267465716359050}
-  - {fileID: 711467971797878469}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &8164032780579195856
@@ -7258,6 +7257,16 @@ MonoBehaviour:
       m_Flags: 8
     m_Flags: 0
     m_Priority: 0
+  move:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 1fdd5378-4bd7-4604-936f-fabd54e07301
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+    m_Priority: 0
   shoot:
     m_Name: Shoot
     m_Type: 0
@@ -7286,10 +7295,16 @@ MonoBehaviour:
     m_Priority: 0
   moveForce: 10
   rotationForce: 2.5
+  walkSpeed: 4
+  groundCheck: {fileID: 0}
+  groundCheckRadius: 0.25
+  groundTurnSpeed: 12
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
   thrustParticleSystem: {fileID: 639751253496812371}
   leftThrustParticleSystem: {fileID: 478108273228444919}
   rightThrustParticleSystem: {fileID: 798061636988180745}
-  thrustAudioClip: {fileID: 0}
 --- !u!82 &6569836469286737570
 AudioSource:
   m_ObjectHideFlags: 0
@@ -7403,6 +7418,8 @@ MonoBehaviour:
   landingAudioClip: {fileID: 8300000, guid: 4b5b13dc4e8bb4b4cb8ac26aa5392a63, type: 3}
   explosionParticleSystem: {fileID: 598989709631600736}
   landingParticleSystem: {fileID: 6326664477110235913}
+  levelCompletePanel: {fileID: 0}
+  pauseGameOnComplete: 1
 --- !u!114 &4020756753113141104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7432,6 +7449,7 @@ MonoBehaviour:
   currentAmmo: 10
   maxAmmo: 10
   infiniteAmmo: 0
+  ammoHUD: {fileID: 0}
   bulletSpeed: 50
   bulletRate: 1
   bulletDamage: 1
@@ -7469,6 +7487,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 711467971797878469}
   - {fileID: 9009465793497083737}
   - {fileID: 4888513787655865702}
   - {fileID: 4888513787793638944}
